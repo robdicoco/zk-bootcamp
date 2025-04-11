@@ -1,6 +1,6 @@
 ---
 marp: true
-theme: default
+theme: gaia
 ---
 
 # **Aula 1: Introdução à Web3**
