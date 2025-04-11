@@ -5,7 +5,8 @@ theme: gaia
 
 # **Aula 1: Introdução à Web3**
 
-_(Bootcamp ZkVerify | 28/04 a 02/05 → Hackathon 12/05 a 16/05)_
+- data: 28/04
+- prof: Lucas Oliveira
 
 ## **1. Abertura**
 

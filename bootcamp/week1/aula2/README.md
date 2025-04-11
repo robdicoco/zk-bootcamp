@@ -5,7 +5,8 @@ theme: gaia
 
 # **Aula 2: Introdução ao Solidity**
 
-_(Bootcamp ZkVerify | 29/04 - Fundamentos Web3)_
+- data: 29/04
+- prof: Lucas Oliveira
 
 ## **1. Abertura**
 
