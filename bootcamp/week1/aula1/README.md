@@ -1,6 +1,6 @@
 ---
 marp: true
-theme: gaia
+theme: default
 ---
 
 # **Aula 1: Introdução à Web3**
@@ -14,18 +14,17 @@ Sejam todos bem-vindos ao Bootcamp Web3 da NearX, sua porta de entrada para o ec
 
 ---
 
-### **Programação:**
+### **2. Programação:**
 
 1. **Apresentação**: Quem somos
-2. **Jornada do Bootcamp/Hackathon**
+2. **Jornada do Bootcamp/Hackathon**: Cronograma & Estudos
 3. **Web3 na Prática**: Blockchain, Smart Contracts e ZK Proofs
-4. **Próximos Passos**
 
 > **Dica:** QR code para o Discord.
 
 ---
 
-## **2. Apresentação**
+## **3. Apresentação**
 
 ### **Lucas Oliveira**
 
@@ -59,7 +58,7 @@ Sejam todos bem-vindos ao Bootcamp Web3 da NearX, sua porta de entrada para o ec
 
 ---
 
-## **3. Jornada do Bootcamp**
+## **4. Jornada do Bootcamp**
 
 ### **Semana 1 (Fundamentos Web3):**
 
@@ -71,8 +70,6 @@ Sejam todos bem-vindos ao Bootcamp Web3 da NearX, sua porta de entrada para o ec
 
 ---
 
-## **3. Jornada do Bootcamp**
-
 ### **Semana 2 (Imersão ZK):**
 
 - **03/05**: Criptografia → Base para ZK Proofs.
@@ -82,8 +79,6 @@ Sejam todos bem-vindos ao Bootcamp Web3 da NearX, sua porta de entrada para o ec
 - **07/05**: Projeto FullStack 2 → MVP para o hackathon.
 
 ---
-
-## **3. Jornada do Bootcamp**
 
 ### **Semana 3 (Mentorias/Hackathon):**
 
@@ -95,52 +90,49 @@ Sejam todos bem-vindos ao Bootcamp Web3 da NearX, sua porta de entrada para o ec
 
 ---
 
-## **4. Web3 na Prática**
+## **5. Web3 na Prática**
 
 ### **Demo Rápida**
 
-- **DApp com ZK Proofs**: Mostre um fluxo de verificação de idade sem revelar dados.
+- **DApp Token Mint**
 
 ---
 
-### **4.1 Blockchain**
+### **5.1 Blockchain**
 
-- **Carteiras (Wallets)**: MetaMask, Phantom.
-- **Transações**: Como funcionam (gas, nonce).
-- **Blocos**: Estrutura imutável.
-- **Consenso**: Proof-of-Work vs. Proof-of-Stake.
-
----
-
-### **4.2 Smart Contracts**
-
-- **Ethereum**: Plataforma líder para contratos.
-- **EVM/Solidity**: Padrão para desenvolvimento.
-- **Não-EVM (Rust)**: Solana, Near, Polkadot.
+- **Carteiras (Wallets)**
+- **Transações**
+- **Blocos**
+- **Consenso**
 
 ---
 
-### **4.3 ZK Proofs**
+### **5.2 Smart Contracts**
+
+- **Ethereum**
+- **EVM/Solidity**
+- **Não-EVM (Rust)**
+
+---
+
+### **5.3 Provas ZK**
 
 - **Conceitos**: Privacidade + escalabilidade.
-- **ZkVerify**:
-  - Como gerar e verificar provas.
-  - Casos de uso no hackathon.
+- **ZkVerify**: Verificador de provas.
 
 ---
 
-## **5. Conclusão**
+## **6. Conclusão**
 
 **Recapitulação:**
 
-1. **Apresentação**: Quem somos
-2. **Jornada do Bootcamp/Hackathon**
-3. **Web3 na Prática**: Blockchain, Smart Contracts e ZK Proofs
-4. **Próximos Passos**
+1. **Apresentação**: Quem somos!
+2. **Jornada do Bootcamp/Hackathon**: Cronograma.
+3. **Web3 na Prática**: Blockchain, Smart Contracts e Provas ZK.
 
 ---
 
-## **📌 Lição de Casa**
+## **7. 📌 Lição de Casa**
 
 1. Instalar Foundry
 2. Ler docs [Solidity](https://docs.soliditylang.org)
@@ -152,6 +144,6 @@ Sejam todos bem-vindos ao Bootcamp Web3 da NearX, sua porta de entrada para o ec
 
 **29/04 – Introdução ao Solidity**
 
-- Escrever seu primeiro smart contract.
+- Escrever seu primeiro smart contract (token erc20).
 
 _"Não esqueça: Aula ao vivo amanhã, 19h, no YouTube. Traga suas dúvidas!"_
