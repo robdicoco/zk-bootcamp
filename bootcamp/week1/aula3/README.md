@@ -21,7 +21,7 @@ Hoje vamos conectar o mundo web2 ao web3.
 1. **Configurção**: Setup inicial
 2. **Fundamentos**: Providers, Signers e RPC
 3. **MetaMask**: Autenticação Web3
-4. **React + ethers.js**: Integração prática
+4. **React + Viem**: Integração prática
 5. **Operações On-Chain**: Leitura e escrita
 6. **Segurança**: Boas práticas
 
@@ -75,20 +75,20 @@ Hoje vamos conectar o mundo web2 ao web3.
 
 ---
 
-## **8. 📌 Lição de Casa**
+## **8. Lição de Casa**
 
 - Coloque sua cara no projeto
 - Faça deploy usando vercel
-- Post no Linkedin (3/10)
+- Post no Linkedin #zknearx (3/10)
 
 **Recursos:**
 
-- [Documentação ethers.js](https://docs.ethers.org/v6/)
+- [Documentação Viem](https://viem.sh)
 - [ABI ERC-20](https://ethereum.org/pt/developers/docs/standards/tokens/erc-20/)
 
 ---
 
-## **⏭ Próxima Aula**
+## **9. Próxima Aula**
 
 **01/05 – Solidity Avançado**
 
