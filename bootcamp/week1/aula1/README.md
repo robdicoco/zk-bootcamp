@@ -15,7 +15,7 @@ Sejam todos bem-vindos ao Bootcamp Web3 da NearX, sua porta de entrada para o ec
 
 ---
 
-### **2. Programação:**
+## **2. Programação:**
 
 1. **Apresentação**: Quem somos
 2. **Jornada do Bootcamp/Hackathon**: Cronograma & Estudos
@@ -95,7 +95,7 @@ Sejam todos bem-vindos ao Bootcamp Web3 da NearX, sua porta de entrada para o ec
 
 ### **Demo Rápida**
 
-- **DApp Token Mint**
+- **DApp Earth's Central Bank**
 
 ---
 
@@ -123,9 +123,7 @@ Sejam todos bem-vindos ao Bootcamp Web3 da NearX, sua porta de entrada para o ec
 
 ---
 
-## **6. Conclusão**
-
-**Recapitulação:**
+## **6. Recapitulação:**
 
 1. **Apresentação**: Quem somos!
 2. **Jornada do Bootcamp/Hackathon**: Cronograma.
@@ -133,15 +131,16 @@ Sejam todos bem-vindos ao Bootcamp Web3 da NearX, sua porta de entrada para o ec
 
 ---
 
-## **7. 📌 Lição de Casa**
+## **7. Lição de Casa**
 
 1. Instalar Foundry
 2. Ler docs [Solidity](https://docs.soliditylang.org)
 3. Ler docs [ZkVerify](https://github.com/zkverify/docs)
+4. Postar no Linkedin (1/10)
 
 ---
 
-## **⏭ Próxima Aula**
+## **8. Próxima Aula**
 
 **29/04 – Introdução ao Solidity**
 
