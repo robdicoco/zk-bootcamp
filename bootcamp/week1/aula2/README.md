@@ -134,7 +134,9 @@ if(amount < 0) {
 address owner;
 
 modifier onlyOwner() {
-    require(msg.sender == owner, "Not authorized");
+    if(msg.sender != owner) {
+        revert("Not authorized");
+    }
     _;
 }
 ```
@@ -152,16 +154,16 @@ modifier onlyOwner() {
 
 ---
 
-## **📌 Lição de Casa**
+## **9. Lição de Casa**
 
 1. Implemente o seu Token e faça deploy na Testnet
-2. Post no Linkedin (2/10)
+2. Post no Linkedin #zknearx (2/10)
 
 ---
 
-## **⏭ Próxima Aula**
+## **10. Próxima Aula**
 
 **30/04 – JavaScript & Web3**
 
-- Como conectar seu frontend/node.js com esmartconrtacts smart contracts
-- Uso do Ethers.js e MetaMask
+- Como conectar seu frontend com smart contracts
+- Uso do Viem e MetaMask
