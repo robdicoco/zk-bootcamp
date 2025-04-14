@@ -136,7 +136,7 @@ Sejam todos bem-vindos ao Bootcamp Web3 da NearX, sua porta de entrada para o ec
 1. Instalar Foundry
 2. Ler docs [Solidity](https://docs.soliditylang.org)
 3. Ler docs [ZkVerify](https://github.com/zkverify/docs)
-4. Post no Linkedin (1/10)
+4. Post no Linkedin #zknearx (1/10)
 
 ---
 
