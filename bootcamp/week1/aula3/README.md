@@ -1,114 +1,89 @@
-# 🎓 Aula 3: **JavaScript para Web3**
+---
+marp: true
+theme: gaia
+---
 
-📅 **Data:** 30/04  
-👨‍🏫 **Professor:** Lucas Oliveira  
-📍 **Plataforma:** YouTube  
-⏱ **Duração:** 1 hora
+# **Aula 3: JavaScript & Web3**
+
+- data: 30/04
+- prof: Lucas Oliveira
+
+## **1. Abertura**
+
+**"Hello World, Devs!"**
+
+Hoje vamos conectar um frontend React a smart contracts usando viem e MetaMask.
 
 ---
 
-## 🎬 **[00:00 – 05:00] – Abertura e visão geral**
+### **2. Programação**
 
-- Relembrar aula anterior (Solidity/Foundry)
-- Explicar a ponte frontend ↔ smart contract: o que é necessário?
-- Objetivo da aula: conectar um projeto React com um contrato via Metamask, fazer transações e exibir dados on-chain
-- Mostrar roadmap da aula
-
----
-
-## 🔌 **[05:00 – 15:00] – Fundamentos da conexão Web3 com JavaScript**
-
-- O que são **providers** (ex: Metamask, Alchemy, Infura)
-- O que são **signers** e transações
-- Diferença entre **leitura** (call) e **escrita** (send)
-- Introdução a **ethers.js** (ou opcionalmente viem)
-
-```bash
-npm install ethers
-```
-
-- Exemplo básico:
-
-```js
-import { ethers } from "ethers";
-const provider = new ethers.BrowserProvider(window.ethereum);
-const signer = await provider.getSigner();
-```
-
-> Mostrar no console como conectar e pegar o `signer.address`
+1. **Fundamentos**: Providers, Signers e RPC
+2. **MetaMask**: Autenticação Web3
+3. **React + ethers.js**: Integração prática
+4. **Operações On-Chain**: Leitura e escrita
+5. **Segurança**: Boas práticas
 
 ---
 
-## 🦊 **[15:00 – 25:00] – Autenticação via Metamask**
+## **3. Fundamentos de Web3**
 
-- Como funciona a conexão com Metamask
-- Como pedir permissão de uso da carteira:
+- **Provider:** O provider é configurado com uma URL-RPC da blockchain e serve como ponto de acesso à rede.
 
-```js
-await window.ethereum.request({ method: "eth_requestAccounts" });
-```
+- **Signer:** O signer é usado para assinar transações e escrever na blockchain.
 
-- Como assinar uma mensagem (autenticação Web3):
-
-```js
-const signature = await signer.signMessage("Login via Web3");
-```
-
-- Explicar a importância da assinatura: "prova de que você controla a wallet"
-
-> Mostrar isso no navegador ao vivo
+- **Network:** A blockchain com a qual o dApp se conecta seja a rede principal ou de teste
 
 ---
 
-## 💻 **[25:00 – 40:00] – Projeto React com contrato existente**
+## **4. Setup inicial Web3**
 
-- Setup básico de React + ethers:
-
-```bash
-npx create-react-app web3-dapp
-cd web3-dapp
-npm install ethers
-```
-
-- Integrar com um contrato ERC20 existente (exibir saldo):
-
-```js
-const contract = new ethers.Contract(contractAddress, abi, signer);
-const balance = await contract.balanceOf(userAddress);
-```
-
-> Exibir dados na tela com hooks: `useEffect`, `useState`
-
-- Mostrar como separar lógica Web3 em um `web3.js` ou `hooks/useWeb3`
+- viem@v2.26.5
+- vite
+- react
 
 ---
 
-## 📡 **[40:00 – 50:00] – Exibindo dados on-chain e enviando transações**
+## **5. Autenticação com MetaMask**
 
-- Exibir nome, símbolo e saldo de token
-- Enviar uma transferência:
-
-```js
-await contract.transfer(recipient, amount);
-```
-
-- Tratar erros (sem saldo, Metamask rejeitada etc.)
-- Como lidar com o loading / estado de transação
+1. Se conectar na rede (Provider)
+2. Fazer login com wallet (Signer)
 
 ---
 
-## 🔐 **[50:00 – 55:00] – Boas práticas e segurança**
+## 6. Dashboard
 
-- Nunca expor a private key no frontend
-- Usar `.env` para endpoints e configurações
-- Trabalhar com redes de teste (Goerli, Sepolia)
-- Usar block explorers para ver transações (Etherscan)
+0. Configurar integração (ABI + Contrato)
+1. Buscar dados do contrato (read)
+2. Enviar transações (write)
 
 ---
 
-## 📣 **[55:00 – 60:00] – Encerramento e desafios**
+## **9. Conclusão**
 
-- Recapitular: conexão Metamask, leitura e escrita com ethers.js, React
-- Desafio: conectar ao contrato da aula anterior e mostrar o saldo
-- Próxima aula: Criptografia para Blockchain (01/05)
-- CTA: Suba seu projeto, compartilhe no Discord/Telegram
+**Recapitulação:**
+
+1. Conexão Web3 com ethers.js
+2. Autenticação via MetaMask
+3. Leitura/Escrita em contratos
+
+---
+
+## **10. 📌 Lição de Casa**
+
+**Recursos:**
+
+- [Documentação ethers.js](https://docs.ethers.org/v6/)
+- [ABI ERC-20](https://ethereum.org/pt/developers/docs/standards/tokens/erc-20/)
+
+---
+
+## **⏭ Próxima Aula**
+
+**01/05 – Solidity Avançado**
+
+- Herança e bibliotecas
+- Otimização de gas
+- Padrões de segurança
+
+_"Poste seu DApp no #showcase do Discord!"_
