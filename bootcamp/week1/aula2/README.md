@@ -16,7 +16,7 @@ Hoje vamos dar nosso primeiro passo no desenvolvimento de **smart contracts** co
 
 ---
 
-### **2. Programação:**
+## **2. Programação:**
 
 1. **Foundry**: Configuração do ambiente
 2. **EVM & Solidity**: O ambiente de execução
@@ -37,10 +37,10 @@ Hoje vamos dar nosso primeiro passo no desenvolvimento de **smart contracts** co
 
 ### Foundry
 
-- cast
-- anvil
-- forge
-- chisel
+- cast: Ferramenta para interagir com contratos e enviar transações.
+- anvil: Simulador de rede local para testes de contratos.
+- forge: Compilador e ferramenta de construção para contratos Solidity.
+- chisel: REPL de solidity.
 
 ---
 
@@ -58,7 +58,7 @@ Hoje vamos dar nosso primeiro passo no desenvolvimento de **smart contracts** co
 
 ---
 
-### **Smart Contracts = Class**
+### **Smart Contracts == Class**
 
 - Class -> Contract
 - Methods -> Functions
@@ -121,27 +121,29 @@ contract HelloWorld {
 ### **Padrões Críticos:**
 
 1. **Validação**:
-   ```solidity
-   require(amount > 0, "Amount must be positive");
-   ```
+
+```solidity
+if(amount < 0) {
+    revert("Amount must be positive");
+}
+```
+
 2. **Controle de Acesso**:
 
-   ```solidity
-   address owner;
+```solidity
+address owner;
 
-   modifier onlyOwner() {
-       require(msg.sender == owner, "Not authorized");
-       _;
-   }
-   ```
+modifier onlyOwner() {
+    require(msg.sender == owner, "Not authorized");
+    _;
+}
+```
 
 3. **Proteção contra overflow**: Use OpenZeppelin's `SafeMath`.
 
 ---
 
-## **8. Conclusão**
-
-**Recapitulação:**
+## **8. Recapitulação:**
 
 1. Foundry = ferramenta essencial para desenvolvimento
 2. Solidity = linguagem para smart contracts na EVM
@@ -153,6 +155,7 @@ contract HelloWorld {
 ## **📌 Lição de Casa**
 
 1. Implemente o seu Token e faça deploy na Testnet
+2. Post no Linkedin (2/10)
 
 ---
 
