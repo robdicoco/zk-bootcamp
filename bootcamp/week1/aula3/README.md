@@ -12,35 +12,35 @@ theme: gaia
 
 **"Hello World, Devs!"**
 
-Hoje vamos conectar um frontend React a smart contracts usando viem e MetaMask.
+Hoje vamos conectar o mundo web2 ao web3.
 
 ---
 
 ### **2. Programação**
 
-1. **Fundamentos**: Providers, Signers e RPC
-2. **MetaMask**: Autenticação Web3
-3. **React + ethers.js**: Integração prática
-4. **Operações On-Chain**: Leitura e escrita
-5. **Segurança**: Boas práticas
+1. **Configurção**: Setup inicial
+2. **Fundamentos**: Providers, Signers e RPC
+3. **MetaMask**: Autenticação Web3
+4. **React + ethers.js**: Integração prática
+5. **Operações On-Chain**: Leitura e escrita
+6. **Segurança**: Boas práticas
 
 ---
 
-## **3. Fundamentos de Web3**
-
-- **Provider:** O provider é configurado com uma URL-RPC da blockchain e serve como ponto de acesso à rede.
-
-- **Signer:** O signer é usado para assinar transações e escrever na blockchain.
-
-- **Network:** A blockchain com a qual o dApp se conecta seja a rede principal ou de teste
-
----
-
-## **4. Setup inicial Web3**
+## **3. Setup inicial Web3**
 
 - viem@v2.26.5
 - vite
 - react
+- metamask
+
+---
+
+## **4. Fundamentos de Web3**
+
+- **Provider:** O provider é configurado com uma URL-RPC da blockchain e serve como ponto de acesso à rede.
+- **Signer:** O signer é usado para assinar transações e escrever na blockchain.
+- **Network:** A blockchain com a qual o dApp se conecta seja a rede principal ou de teste
 
 ---
 
@@ -49,27 +49,37 @@ Hoje vamos conectar um frontend React a smart contracts usando viem e MetaMask.
 1. Se conectar na rede (Provider)
 2. Fazer login com wallet (Signer)
 
+```js
+// PROGRAMMING !
+```
+
 ---
 
-## 6. Dashboard
+## **6. Dashboard**
 
 0. Configurar integração (ABI + Contrato)
 1. Buscar dados do contrato (read)
 2. Enviar transações (write)
 
+```js
+// PROGRAMMING !
+```
+
 ---
 
-## **9. Conclusão**
+## **7. Recapitulação:**
 
-**Recapitulação:**
-
-1. Conexão Web3 com ethers.js
+1. Conexão Web3 com viem
 2. Autenticação via MetaMask
 3. Leitura/Escrita em contratos
 
 ---
 
-## **10. 📌 Lição de Casa**
+## **8. 📌 Lição de Casa**
+
+- Coloque sua cara no projeto
+- Faça deploy usando vercel
+- Post no Linkedin (3/10)
 
 **Recursos:**
 
