@@ -1,144 +1,138 @@
-# 🎓 Aula 4: **Solidity Avançado**
+---
+marp: true
+theme: gaia
+---
 
-📅 **Data:** 01/05  
-👨‍🏫 **Professor:** Lucas Oliveira  
-📍 **YouTube**  
-⏱ **Duração:** 1 hora
+# **Aula 4: Solidity Avançado**
+
+- data: 01/05
+- prof: Lucas Oliveira
+
+## **1. Abertura**
+
+**"Hello World, Devs!"**
+
+Hoje vamos aprofundar no Solidity.
 
 ---
 
-## 🎬 **[00:00 – 05:00] – Abertura e contexto**
+## **2. Programação**
 
-- Relembrar o que vimos até agora: contratos simples, Foundry, ERC20
-- Explicar o objetivo da aula: construir contratos mais robustos e seguros
-- Mostrar a agenda e onde os alunos vão aplicar esse conteúdo no Hackathon
-- Incentivo: “Agora é a hora de deixar seu contrato pronto pro mundo real”
+1. **Instalando Bibliotecas**: Openzepplin
+2. **Padrão Ownable, Pausable**: Implementando Heranças
+3. **Segurança**: Boas práticas
+4. **ERC20**: Customizações
+5. **TDD**: Adicionando testes nos noss on
 
 ---
 
-## 🧠 **[05:00 – 15:00] – Funções complexas, modificadores, herança**
+## **3. - Instalando Bibliotecas**
 
-### ✅ **Modificadores**
+- Openzepplin
+- Solady
+- Solmate
 
-- Usados para validar condições antes de executar funções:
+---
 
-```solidity
-modifier onlyOwner() {
-    require(msg.sender == owner, "Not owner");
-    _;
-}
+## **4. Padrão Ownable, Pausable**
+
+- Ownable: Permite que um contrato tenha um único proprietário com controle total sobre suas funções.
+- Pausable: Permite que o proprietário pause a execução de funções críticas em situações de emergência.
+- ReentrancyGuard: Protege contra ataques de reentrância, garantindo que uma função não possa ser chamada novamente antes de sua execução ser concluída.
+
+```js
+// PROGRAMMING !
 ```
 
-### 🧩 **Funções mais complexas**
-
-- Operações em arrays, structs, mappings encadeados
-- Uso de `require`, `revert`, `try/catch`
-
-### 🧬 **Herança**
-
-- Criar contratos base e estender funcionalidades
-
-```solidity
-contract Parent { /* ... */ }
-contract Child is Parent { /* ... */ }
-```
-
-> Demonstração: contrato com `Ownable` + modificador `onlyOwner` aplicado
-
 ---
 
-## 🛠 **[15:00 – 25:00] – Bibliotecas e otimização de gas**
+## **5. Segurança**
 
-- Como usar bibliotecas para reaproveitar código (`library SafeMath`, etc.)
-- Reduzir `storage` desnecessário, usar `calldata` e `memory` corretamente
-- Quando usar `unchecked` para pular checagens (com cuidado!)
-
-```solidity
-unchecked {
-    counter += 1;
-}
-```
-
-> Mostrar comparação de uso de gas com/sem otimizações no Foundry
-
----
-
-## 🛡 **[25:00 – 35:00] – Padrões de segurança**
-
-### 🔁 Reentrancy
-
-- Explicar o ataque clássico (ex: DAO Hack)
-- Mostrar vulnerável vs protegido:
+### Reentrancy
 
 ```solidity
 // Proteção
 bool internal locked;
 
 modifier noReentrancy() {
-    require(!locked, "No reentrancy");
+    if(locked == true) {
+        revert("No reentrancy");
+    }
     locked = true;
     _;
     locked = false;
 }
 ```
 
-### 🔒 Access control
+---
+
+### Access control
 
 - `Ownable`, `AccessControl`, controle por roles
 - Exemplo com `onlyRole(keccak256("MINTER_ROLE"))`
 
-> Demonstrar uma função de mint com controle de acesso
-
----
-
-## 💸 **[35:00 – 45:00] – Criando um ERC20 customizado**
-
-- Começar de um ERC20 da OpenZeppelin
-- Adicionar:
-  - Taxa de transferência
-  - Pause/unpause
-  - Lista de bloqueados (blacklist)
-
 ```solidity
-mapping(address => bool) public isBlocked;
+address owner;
 
-function transfer(address to, uint256 amount) public override returns (bool) {
-    require(!isBlocked[msg.sender], "Sender blocked");
-    // lógica de taxa
+modifier onlyOwner() {
+    if(msg.sender != owner) {
+        revert("Not authorized");
+    }
+    _;
 }
 ```
 
-> Mostrar deploy local + interação com o contrato via Foundry/Remix
+---
+
+## **6. ERC20**: Customizações
+
+- Adicionar:
+  - Função balance retorna sempre 10 Tokens
+  - Apenas transferir 1 token por vez
+
+```js
+// PROGRAMMING !
+```
 
 ---
 
-## 🧪 **[45:00 – 55:00] – Testes automatizados com Foundry**
+## **7. Testes automatizados com Foundry**
 
 - O poder dos testes locais: `forge test`
-- Criar contrato de teste:
-
-```solidity
-function testTransfer() public {
-    token.transfer(user, 100);
-    assertEq(token.balanceOf(user), 100);
-}
-```
-
 - Como testar falhas esperadas com `vm.expectRevert`
+- Testes simulando outras contas com `vm.prank`
+- Criar contrato base de teste:
 
-> Mostrar teste passando e falhando
+```js
+// PROGRAMMING !
+```
 
 ---
 
-## 📣 **[55:00 – 60:00] – Encerramento e desafios**
+## **8. Recapitulação**
 
-- Recapitular: modificadores, herança, segurança, gas, testes
-- Propor desafio: escrever um token ERC20 com:
+- Modificadores e herança para reutilização de código.
+- Estratégias de otimização de gas.
+- Padrões críticos de segurança.
+- ERC20 customizado com testes automatizados.
 
-  - Modificador de pause
-  - Blacklist
-  - Taxa de 1% nas transações
-  - Testes cobrindo os principais fluxos
+---
 
-- Preparar para a próxima aula: Criptografia para blockchain (02/05)
-- CTA: compartilhe seu repositório no Discord para receber feedback
+## **9. Lição de Casa**
+
+- Implementar um token ERC20 com:
+- Sistema de pause.
+- Blacklist.
+- Testes cobrindo fluxos críticos.
+- Compartilhar o repositório no Discord para feedback.
+- Post no Linkedin #zknearx (4/10)
+
+---
+
+## **10. Próxima Aula**
+
+**02/05 – Projeto FullStack**
+
+- Integrar com as novas funcionalidades
+
+- "Poste seu token no #showcase do Discord e marque a NearX no LinkedIn!"
