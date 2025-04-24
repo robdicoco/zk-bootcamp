@@ -10,101 +10,170 @@ theme: gaia
 
 ## **1. Abertura**
 
-**"Hello World, Devs!"**
+**Hello World!**
 
-Hoje vamos aprofundar no Solidity.
+Sejam todos bem-vindos ao GRANDE CÓDIGO.
+
+Bootcamp/Hackathon/Incubação da NearX
+
+Sua porta de entrada para o ecossistema blockchain/web3 e provas ZK.
+
+Hoje vamos mergulhar fundo no Solidity.
 
 ---
 
 ## **2. Programação**
 
-1. **Instalando Bibliotecas**: Openzepplin
-2. **Padrão Ownable, Pausable**: Implementando Heranças
-3. **Segurança**: Boas práticas
-4. **ERC20**: Customizações
-5. **TDD**: Adicionando testes nos noss on
+1. **Bibliotecas**: OpenZeppelin, Solady e Solmate
+2. **Padrões de Contratos**: Ownable, Pausable e ReentrancyGuard
+3. **Segurança**: Controle de acesso e proteção contra reentrância
+4. **ERC-20 Customizado**: Restrições e lógicas personalizadas
+5. **Testes Automatizados**: Foundry e simulação de cenários
 
 ---
 
 ## **3. - Instalando Bibliotecas**
 
-- Openzepplin
-- Solady
-- Solmate
+```bash
+forge install transmissions11/solmate
+forge install OpenZeppelin/openzeppelin-contracts
+forge install vectorized/solady
+```
+
+---
+
+#### **OpenZeppelin**
+
+📌 _O padrão ouro para desenvolvimento seguro_
+
+- Fornece implementações auditadas dos principais padrões ERC (ERC-20, ERC-721)
+- Inclui módulos prontos para:
+  - Controle de acesso (`Ownable`, `AccessControl`)
+  - Segurança (`ReentrancyGuard`, `Pausable`)
+  - Utilidades (`SafeERC20`, `Counters`)
+- Ideal para: Projetos em produção que exigem máxima segurança
+
+---
+
+#### **Solady**
+
+⚡ _O turbo da eficiência em gas_
+
+- Foco extremo em otimização de custos de transação
+- Implementações "gas-optimized" de padrões comuns
+- Recursos exclusivos:
+  - Assinaturas EIP-712
+  - Helpers para ECDSA e merkle proofs
+- Ideal para: Projetos que priorizam economia de gas
+
+---
+
+#### **Solmate**
+
+🛠️ _O kit de ferramentas minimalista_
+
+- Versões leves e simplificadas dos contratos OpenZeppelin
+- Filosofia "menos abstrações, mais controle"
+- Destaques:
+  - Sem dependências externas
+  - Código altamente legível
+  - Fácil customização
+- Ideal para: Desenvolvedores que querem entender cada linha de código
 
 ---
 
 ## **4. Padrão Ownable, Pausable**
 
-- Ownable: Permite que um contrato tenha um único proprietário com controle total sobre suas funções.
-- Pausable: Permite que o proprietário pause a execução de funções críticas em situações de emergência.
-- ReentrancyGuard: Protege contra ataques de reentrância, garantindo que uma função não possa ser chamada novamente antes de sua execução ser concluída.
-
-```js
-// PROGRAMMING !
-```
+- **Ownable**: Permite que um contrato tenha um único proprietário com controle total sobre suas funções.
+- **Pausable**: Permite que o proprietário pause a execução de funções críticas em situações de emergência.
+- **ReentrancyGuard**: Protege contra ataques de reentrância, garantindo que uma função não possa ser chamada novamente antes de sua execução ser concluída.
 
 ---
 
-## **5. Segurança**
-
-### Reentrancy
+### Ownable
 
 ```solidity
-// Proteção
-bool internal locked;
+// SPDX-License-Identifier: AGPL-3.0-only
+pragma solidity >=0.8.0;
+abstract contract Ownable {
+    address public owner;
 
-modifier noReentrancy() {
-    if(locked == true) {
-        revert("No reentrancy");
+    modifier onlyOwner() virtual {
+        if (msg.sender != owner) {
+            revert("UNAUTHORIZED");
+        }
+        _;
     }
-    locked = true;
-    _;
-    locked = false;
+
+    constructor(address _owner) {
+        owner = _owner;
+    }
 }
 ```
 
 ---
 
-### Access control
-
-- `Ownable`, `AccessControl`, controle por roles
-- Exemplo com `onlyRole(keccak256("MINTER_ROLE"))`
+### Pausable
 
 ```solidity
-address owner;
+// SPDX-License-Identifier: AGPL-3.0-only
+pragma solidity >=0.8.0;
+abstract contract Pausable {
+    bool public paused;
 
-modifier onlyOwner() {
-    if(msg.sender != owner) {
-        revert("Not authorized");
+    modifier whenNotPaused() {
+        if (paused) {
+            revert("PAUSED");
+        }
+        _;
     }
-    _;
+
+    function pause() public virtual onlyOwner {
+        paused = true;
+    }
+
+    function unpause() public virtual onlyOwner {
+        paused = false;
+    }
 }
 ```
 
 ---
 
-## **6. ERC20**: Customizações
+### ReentrancyGuard
 
-- Adicionar:
-  - Função balance retorna sempre 10 Tokens
-  - Apenas transferir 1 token por vez
+```solidity
+// SPDX-License-Identifier: AGPL-3.0-only
+pragma solidity >=0.8.0;
+abstract contract ReentrancyGuard {
+    uint256 private locked = 1;
 
-```js
-// PROGRAMMING !
+    modifier nonReentrant() virtual {
+        if (locked != 1) {
+            revert("REENTRANCY");
+        }
+
+        locked = 2;
+        _;
+        locked = 1;
+    }
+}
 ```
 
 ---
 
-## **7. Testes automatizados com Foundry**
-
-- O poder dos testes locais: `forge test`
-- Como testar falhas esperadas com `vm.expectRevert`
-- Testes simulando outras contas com `vm.prank`
-- Criar contrato base de teste:
+## **6. Hands-on**
 
 ```js
-// PROGRAMMING !
+// PROGRAMMING, MOTHERF****
+```
+
+---
+
+## **7. Testes automatizados e Attacks**
+
+```js
+// PROGRAMMING, MOTHERF****
 ```
 
 ---
@@ -112,20 +181,26 @@ modifier onlyOwner() {
 ## **8. Recapitulação**
 
 - Modificadores e herança para reutilização de código.
-- Estratégias de otimização de gas.
 - Padrões críticos de segurança.
-- ERC20 customizado com testes automatizados.
+- ERC20 customizado
+- Testes automatizados.
 
 ---
 
 ## **9. Lição de Casa**
 
-- Implementar um token ERC20 com:
-- Sistema de pause.
-- Blacklist.
+### Desafio de Aprendizagem
+
+- Implementar um token ERC20 com: Sistema de pausa e Blacklist.
 - Testes cobrindo fluxos críticos.
-- Compartilhar o repositório no Discord para feedback.
+
+### Desafio de Carreira
+
 - Post no Linkedin #zknearx (4/10)
+
+### Desafio de Comunidade
+
+- 📚 Poste o livro que vc está lendo agora (vai ler). (discord)
 
 ---
 
@@ -133,6 +208,6 @@ modifier onlyOwner() {
 
 **02/05 – Projeto FullStack**
 
-- Integrar com as novas funcionalidades
+- Vamos fazer o deploy do projeto
 
-- "Poste seu token no #showcase do Discord e marque a NearX no LinkedIn!"
+_"Não esqueça: Aula ao vivo amanhã, 19h, no YouTube. Traga suas dúvidas!"_

@@ -181,10 +181,18 @@ Hoje vou te apresentar como vai funcionar o evento
 
 ## **10. Lição de Casa**
 
+### Desafio de Aprendizagem
+
 1. Instalar Foundry
 2. Ler docs [Solidity](https://docs.soliditylang.org)
 3. Ler docs [ZkVerify](https://github.com/zkverify/docs)
+
+### Desafio de Carreira
+
 4. Post no Linkedin #zknearx (1/10)
+
+### Desafio de Comunidade
+
 5. 🖥️ Poste uma foto da sua mesa de trabalho! (discord)
 
 ---

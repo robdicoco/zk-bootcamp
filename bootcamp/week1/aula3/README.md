@@ -256,9 +256,17 @@ const hash = await contract.write.transfer([receiver, amount]);
 
 ## **9. Lição de Casa**
 
+### Desafio de Aprendizagem
+
 - Coloque sua cara no projeto
 - Faça deploy usando vercel
+
+### Desafio de Carreira
+
 - Post no Linkedin #zknearx (3/10)
+
+### Desafio de Comunidade
+
 - 🎧 Poste a sua música mais ouvida/favorita de 2024 (discord)
 
 **Recursos:**

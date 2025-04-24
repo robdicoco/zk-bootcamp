@@ -159,9 +159,17 @@ modifier onlyOwner() {
 
 ## **10. Lição de Casa**
 
+### Desafio de Aprendizagem
+
 1. Implemente o seu Token e faça deploy na Testnet
 2. Instale o node@v20+, metamask e chrome ou firefox
+
+### Desafio de Carreira
+
 3. Post no Linkedin #zknearx (2/10)
+
+### Desafio de Comunidade
+
 4. ☕️ Poste uma foto da sua caneca favorita! (discord)
 
 ---

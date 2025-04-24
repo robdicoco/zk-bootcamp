@@ -1,106 +1,93 @@
-# 🚀 Aula 5: **Projeto FullStack 1**
+---
+marp: true
+theme: gaia
+---
 
-📅 **Data:** 02/05  
-👨‍🏫 **Professor:** Lucas Oliveira  
-📍 **YouTube**  
-⏱ **Duração:** 1 hora
+# **Aula 5: Projeto Fullstack #1**
+
+- data: 02/05
+- prof: Lucas Oliveira
+
+## **1. Abertura**
+
+**Hello World!**
+
+Sejam todos bem-vindos ao GRANDE CÓDIGO.
+
+Bootcamp/Hackathon/Incubação da NearX
+
+Sua porta de entrada para o ecossistema blockchain/web3 e provas ZK.
+
+Hoje vamos fazer o deploy do nosso projeto.
 
 ---
 
-## 🎬 **[00:00 – 05:00] – Boas-vindas e visão geral**
+## **2. Programação**
 
-- Relembrar o que foi feito até agora: Solidity, Token ERC20, testes
-- Apresentar o objetivo da aula: **ligar o contrato inteligente com o front-end**
-- Mostrar o fluxo completo:  
-  `Smart Contract` → `Frontend (React/Vite)` → `Carteira (Metamask)` → `Testnet`
-
----
-
-## 🧱 **[05:00 – 15:00] – Interface com o Token**
-
-- Apresentar um front-end simples (HTML ou React) com botão de `Transfer` e `BalanceOf`
-- Mostrar como conectar com o contrato via Ethers.js ou Viem:
-
-```ts
-const token = new ethers.Contract(tokenAddress, abi, signer);
-await token.transfer(to, amount);
-```
-
-- Ler dados (ex: saldo):
-
-```ts
-const balance = await token.balanceOf(userAddress);
-```
-
-> 💡 Dica: Usar Vite + Tailwind para agilidade no front
+1. **Deploy dos smartcontracts**:
+2. **Deploy do Dapp**
+3. **Integração**
 
 ---
 
-## 🔌 **[15:00 – 25:00] – Integração front + contrato**
+## **3. Deploy de Smart Contracts**
 
-- Como pegar o `contractAddress` do deploy anterior
-- Como carregar o ABI gerado pelo Foundry
-- Como assinar transações com a Metamask no navegador
+### 1. Pegar Faucet
 
-> Demonstração:
+### 2. Deploy com `forge script`
 
-1. Conectar carteira
-2. Transferir tokens via UI
-3. Atualizar saldo ao vivo
+### 3. Verificar smartcontract com Etherscan
 
 ---
 
-## 🌐 **[25:00 – 35:00] – Deploy na testnet**
+## **4. Deploy de Dapp na Vercel**
 
-- Escolher uma testnet (Goerli, Sepolia, Base Sepolia)
-- Como subir o contrato com Foundry:
+### 1. Conta na Vercel
 
-```bash
-forge create --rpc-url $RPC --private-key $KEY src/MeuToken.sol:MeuToken
-```
-
-- Alternativas: usar Remix ou deploy via script
-- Obter faucet + configurar Metamask
-
-> Mostrar hash da transação no block explorer
+### 2. Deploy com `vercel deploy`
 
 ---
 
-## 🧾 **[35:00 – 45:00] – Leitura e escrita de transações reais**
+## **5. Interação com Metamask**
 
-- Explicar diferença entre `call` e `sendTransaction`
-- Como tratar erros de transações
-- Logar eventos (ex: `Transfer`) e exibir no frontend com `ethers.Contract.on`
+### 1. Mintar tokens
 
-```ts
-token.on("Transfer", (from, to, amount) => {
-  console.log("Transfer:", from, to, amount.toString());
-});
-```
+### 2. Transferir tokens
 
 ---
 
-## 🛠️ **[45:00 – 55:00] – Projeto prático**
+## **8. Recapitulação**
 
-### 🚧 Desafio: mini-dApp
-
-- Criar uma interface para:
-  - Ver saldo de tokens
-  - Transferir tokens
-  - Exibir histórico (bônus)
-- Individual ou em grupo
-- Liberdade para usar React, HTML puro, ou frameworks visuais (ex: V0, no-code)
-
-> Mostrar um exemplo pronto e explicar onde customizar
+- Nesta aula, finalizamos o nosso primeiro projeto Fullstack! 🚀
+- Realizamos o deploy dos smart contracts usando o Forge.
+- Fizemos o deploy do front-end na Vercel.
+- Interagimos com o contrato via Metamask (mint e transferência de tokens).
+- Compreendemos a jornada de ponta a ponta de um Dapp no ar.
 
 ---
 
-## 🔚 **[55:00 – 60:00] – Encerramento e próximos passos**
+## **9. Lição de Casa**
 
-- Recapitular:
-  - Conectar contrato com front
-  - Deploy real
-  - Enviar transações com carteiras reais
-- Incentivar: suba seu projeto no GitHub + envie no Discord para feedback
-- Preparar para a próxima aula: Criptografia e fundamentos técnicos
-- Deixar template/repo base (se quiser, posso criar isso rapidinho!)
+### Desafio de Aprendizagem
+
+- Faça deploy e verificação dos seus contrato
+- Faça deploy do seu Dapp
+- Envie seu projeto para o github com um README
+
+### Desafio de Carreira
+
+- Post no Linkedin #zknearx (5/10)
+
+### Desafio de Comunidade
+
+- 🐶 Poste uma foto com o nome do seu pet
+
+---
+
+## **10. Próxima Aula**
+
+**05/05 – Introdução à Criptografia**
+
+- Vamos aprender os fundamentos da segurança em blockchain
+
+_"Não esqueça: Aula ao vivo segunda-feira, 19h, no YouTube. Traga suas dúvidas!"_
