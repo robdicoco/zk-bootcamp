@@ -108,11 +108,46 @@ Sejam todos bem-vindos ao Bootcamp Web3 da NearX, sua porta de entrada para o ec
 
 ---
 
+#### Carteiras (Wallets)
+
+<img src="./wallet.png" alt="wallet" style="width: 70%; height: auto;">
+
+---
+
+#### Transações
+
+<img src="./tx.png" alt="tx" style="width: 70%; height: auto;">
+
+---
+
+#### Blocos
+
+<img src="./block.png" alt="block" style="width: 70%; height: auto;">
+
+---
+
+#### Consenso
+
+<img src="./consenso.png" alt="consenso" style="width: 70%; height: auto;">
+
+---
+
 ### **5.2 Smart Contracts**
 
-- **Ethereum**
 - **EVM/Solidity**
-- **Não-EVM (Rust)**
+- **Não-EVM (WASM/Rust)**
+
+---
+
+#### EVM/Solidity
+
+<img src="./evm.png" alt="evm" style="width: 70%; height: auto;">
+
+---
+
+#### Não-EVM (WASM/Rust)
+
+<img src="./wasm.png" alt="wasm" style="width: 70%; height: auto;">
 
 ---
 
