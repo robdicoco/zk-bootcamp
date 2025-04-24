@@ -10,28 +10,34 @@ theme: gaia
 
 ## **1. Abertura**
 
-**"Hello World!"**
+**Hello World!**
+
+Sejam todos bem-vindos ao GRANDE CÓDIGO.
+
+Bootcamp/Hackathon/Incubação da NearX
+
+Sua porta de entrada para o ecossistema blockchain/web3 e provas ZK.
 
 Hoje vamos dar nosso primeiro passo no desenvolvimento de **smart contracts** com Solidity.
 
 ---
 
-## **2. Programação:**
+## **2. Programação**
 
-1. **Foundry**: Configuração do ambiente
-2. **EVM & Solidity**: O ambiente de execução
-3. **Fundamentos**: Tipos, variáveis e funções
-4. **ERC-20 na Prática**: Criando seu primeiro token
-5. **Segurança Básica**: Padrões essenciais
+1. **Configuração do Ambiente**: Ferramentas do Foundry
+2. **EVM & Solidity**: Arquitetura e ecossistema
+3. **Fundamentos de Solidity**: Tipos de dados, funções e memória
+4. **Segurança Básica**: Validação e controle de acesso
+5. **ERC-20 na Prática**: Implementação de um token
 
 ---
 
 ## **3. Configurando o Ambiente com Foundry**
 
-- Node.js -> npm
-- Python -> Poetry
-- Rust -> Cargo
-- Solidity -> ???
+### **Por que Solidity? (2025)**
+
+- EVM é a plataforma mais usada para smart contracts (Ethereum, Polygon, Arbitrum, etc).
+- Solidiyt é a linguagem mais madura para EVM.
 
 ---
 
@@ -44,29 +50,17 @@ Hoje vamos dar nosso primeiro passo no desenvolvimento de **smart contracts** co
 
 ---
 
-## **4. EVM & Solidity**
+### EVM & Solidity
 
-- Java/Kotlin/... -> JVM -> CPU
-- Solidity/Vyper/... -> EVM -> Blockchain
-
----
-
-### **Por que Solidity? (2025)**
-
-- EVM é a plataforma mais usada para smart contracts (Ethereum, Polygon, Arbitrum, etc).
-- Solidiyt é a linguagem mais madura para EVM.
+- Solidity → EVM → Blockchain (como Java → JVM → CPU).
+- **Smart Contracts ≈ Classes**:
+  - `Contract` → `Class`
+  - `Functions` → `Methods`
+  - `Storage` → `Attributes`
 
 ---
 
-### **Smart Contracts == Class**
-
-- Class -> Contract
-- Methods -> Functions
-- Attributes -> Storage
-
----
-
-## **5. Fundamentos do Solidity**
+## **4. Fundamentos de Solidity**
 
 ```js
 contract HelloWorld {
@@ -88,44 +82,18 @@ contract HelloWorld {
 
 ---
 
-### **Conceitos-Chave:**
+## **5. Solidity: Conceitos-Chave:**
 
-- **Tipos de dados**: `(u)int8/16/32/64/128/256`, `address`, `bool`, `string`, `array`, `mapping`, ...
-- **Visibilidade**: `public`, `private`
-- **Funções**: `view`, `pure`, `external` e `internal`
-- **Gerenciamento de memória**: `storage`, `memory`
-
----
-
-## **6. Criando um Token ERC-20**
-
-### **Padrão ERC-20**
-
-#### READ
-
-- `name()`
-- `symbol()`
-- `decimals()`
-- `balanceOf()`
-
-#### WRITE
-
-- `transferFrom()`
-- `transfer()`
-- `approve()`
-- `allowance()`
+| Conceito                     | Exemplos                                                                         |
+| ---------------------------- | -------------------------------------------------------------------------------- |
+| **Tipos de dados**           | `(u)int8/16/32/64/128/256`, `address`, `bool`, `string`, `array`, `mapping`, ... |
+| **Visibilidade**             | `public`, `private`                                                              |
+| **Funções**                  | `view`, `pure`, `external`, `internal`                                           |
+| **Gerenciamento de memória** | `storage`, `memory`                                                              |
 
 ---
 
-### **Hands-on**
-
-```js
-// PROGRAMMING, MOTHERF****
-```
-
----
-
-## **7. Segurança Básica**
+## **6. Segurança Básica**
 
 ### **Padrões Críticos:**
 
@@ -152,25 +120,56 @@ modifier onlyOwner() {
 
 ---
 
-## **8. Recapitulação:**
+## **7. Criando um Token ERC-20**
+
+### **Padrão ERC-20**
+
+#### READ
+
+- `name()`
+- `symbol()`
+- `decimals()`
+- `balanceOf()`
+
+#### WRITE
+
+- `transferFrom()`
+- `transfer()`
+- `approve()`
+- `allowance()`
+
+---
+
+## **8. Hands-on**
+
+```js
+// PROGRAMMING, MOTHERF****
+```
+
+---
+
+## **9. Recapitulação:**
 
 1. Foundry = ferramenta essencial para desenvolvimento
 2. Solidity = linguagem para smart contracts na EVM
-3. ERC-20 = padrão para tokens fungíveis
-4. Segurança = cuidado com detalhes
+3. Segurança = cuidado com detalhes
+4. ERC-20 = padrão para tokens fungíveis
 
 ---
 
-## **9. Lição de Casa**
+## **10. Lição de Casa**
 
 1. Implemente o seu Token e faça deploy na Testnet
-2. Post no Linkedin #zknearx (2/10)
+2. Instale o node@v20+, metamask e chrome ou firefox
+3. Post no Linkedin #zknearx (2/10)
+4. ☕️ Poste uma foto da sua caneca favorita! (discord)
 
 ---
 
-## **10. Próxima Aula**
+## **11. Próxima Aula**
 
 **30/04 – JavaScript & Web3**
 
-- Como conectar seu frontend com smart contracts
-- Uso do Viem e MetaMask
+- Vamos conectar o mundo web2 ao web3.
+
+_"Não esqueça: Aula ao vivo amanhã, 19h, no YouTube. Traga suas dúvidas!"_

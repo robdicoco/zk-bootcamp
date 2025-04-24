@@ -10,16 +10,27 @@ theme: gaia
 
 ## **1. Abertura**
 
-**Hello World!**  
-Sejam todos bem-vindos ao Bootcamp Web3 da NearX, sua porta de entrada para o ecossistema blockchain e provas ZK.
+**Hello World!**
+
+Sejam todos bem-vindos ao GRANDE CÓDIGO.
+
+Bootcamp/Hackathon/Incubação da NearX
+
+Sua porta de entrada para o ecossistema blockchain/web3 e provas ZK.
+
+Hoje vou te apresentar como vai funcionar o evento
 
 ---
 
-## **2. Programação:**
+## **2. Programação**
 
 1. **Apresentação**: Quem somos
 2. **Jornada do Bootcamp/Hackathon**: Cronograma & Estudos
 3. **Web3 na Prática**: Blockchain, Smart Contracts e ZK Proofs
+   - **Demo:** DApp Earth's Central Bank
+   - **Teoria:** Carteiras, Transações, Blocos, Consenso
+   - **Smart Contracts:** EVM/Solidity vs. Não-EVM (WASM/Rust)
+   - **Provas ZK:** Conceitos e ZkVerify
 
 > **Dica:** QR code para o Discord.
 
@@ -99,7 +110,9 @@ Sejam todos bem-vindos ao Bootcamp Web3 da NearX, sua porta de entrada para o ec
 
 ---
 
-### **5.1 Blockchain**
+## **6. Web3 na Teoria**
+
+### **Fundamentos**
 
 - **Carteiras (Wallets)**
 - **Transações**
@@ -108,57 +121,57 @@ Sejam todos bem-vindos ao Bootcamp Web3 da NearX, sua porta de entrada para o ec
 
 ---
 
-#### Carteiras (Wallets)
+### Carteiras (Wallets)
 
 <img src="./assets/wallet.png" alt="wallet" style="width: 70%; height: auto;">
 
 ---
 
-#### Transações
+### Transações
 
 <img src="./assets/tx.png" alt="tx" style="width: 70%; height: auto;">
 
 ---
 
-#### Blocos
+### Blocos
 
 <img src="./assets/block.png" alt="block" style="width: 70%; height: auto;">
 
 ---
 
-#### Consenso
+### Consenso
 
 <img src="./assets/consenso.png" alt="consenso" style="width: 70%; height: auto;">
 
 ---
 
-### **5.2 Smart Contracts**
+## **7. Smart Contracts**
 
 - **EVM/Solidity**
 - **Não-EVM (WASM/Rust)**
 
 ---
 
-#### EVM/Solidity
+### EVM/Solidity
 
 <img src="./assets/evm.png" alt="evm" style="width: 70%; height: auto;">
 
 ---
 
-#### Não-EVM (WASM/Rust)
+### Não-EVM (WASM/Rust)
 
 <img src="./assets/wasm.png" alt="wasm" style="width: 70%; height: auto;">
 
 ---
 
-### **5.3 Provas ZK**
+## **8. Provas ZK**
 
 - **Conceitos**: Privacidade + escalabilidade.
 - **ZkVerify**: Verificador de provas.
 
 ---
 
-## **6. Recapitulação:**
+## **9. Recapitulação:**
 
 1. **Apresentação**: Quem somos!
 2. **Jornada do Bootcamp/Hackathon**: Cronograma.
@@ -166,19 +179,20 @@ Sejam todos bem-vindos ao Bootcamp Web3 da NearX, sua porta de entrada para o ec
 
 ---
 
-## **7. Lição de Casa**
+## **10. Lição de Casa**
 
 1. Instalar Foundry
 2. Ler docs [Solidity](https://docs.soliditylang.org)
 3. Ler docs [ZkVerify](https://github.com/zkverify/docs)
 4. Post no Linkedin #zknearx (1/10)
+5. 🖥️ Poste uma foto da sua mesa de trabalho! (discord)
 
 ---
 
-## **8. Próxima Aula**
+## **11. Próxima Aula**
 
 **29/04 – Introdução ao Solidity**
 
-- Escrever seu primeiro smart contract (token erc20).
+- Vamos escrever nosso primeiro smart contract (token erc20).
 
 _"Não esqueça: Aula ao vivo amanhã, 19h, no YouTube. Traga suas dúvidas!"_
