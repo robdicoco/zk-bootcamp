@@ -1,104 +1,186 @@
-# 🔐 Aula 1: **Introdução à Criptografia**
+---
+marp: true
+theme: gaia
+---
 
-📅 **03/05**  
-👨‍🏫 **Professor:** Lucas Oliveira  
-📍 **YouTube**  
-⏱ **Duração:** 1 hora
+# **Aula 1: Introdução à Web3**
+
+- data: 05/05
+- prof: Lucas Oliveira
+
+## **1. Abertura**
+
+**Hello World!**
+
+Sejam todos bem-vindos ao GRANDE CÓDIGO.
+
+Bootcamp/Hackathon/Incubação da NearX
+
+Sua porta de entrada para o ecossistema blockchain/web3 e provas ZK.
+
+Hoje vou te ensinar os fundamentos de segurança de blockchain
 
 ---
 
-## 🎬 **[00:00 – 05:00] – Abertura e contextualização**
+## **2. Programação**
 
-- Boas-vindas e objetivo da aula: entender os **fundamentos da segurança em blockchain**
-- Como a criptografia garante:
-  - Autenticidade (assinaturas digitais)
-  - Integridade (funções de hash)
-  - Privacidade (criptografia de chave pública)
-
----
-
-## 🧠 **[05:00 – 15:00] – Fundamentos da criptografia para blockchain**
-
-- 🔑 **Chave pública e chave privada**
-
-  - Como funciona a criptografia assimétrica
-  - Exemplo: Metamask gera sua _chave privada_ → usa ela pra assinar
-
-- 🧱 **Funções de hash**
-
-  - Propriedades: determinística, unidirecional, sensível
-  - Exemplo: `keccak256("hello")`
-  - Uso: endereços, verificação de dados, blockchains
-
-- ✍️ **Assinaturas digitais**
-  - Como provar que foi “você” que assinou algo sem mostrar sua chave privada
-  - `msg.sender` = resultado da assinatura com chave privada
+1. **Códificação**: base58 e base64
+2. **Identificação**: Funções de Hash
+3. **Encriptação**: AES-128
+4. **Autentificação**: Assinaturas digitais
 
 ---
 
-## 🧪 **[15:00 – 35:00] – Demonstrações práticas**
+## **3. Códificação**
 
-### A) **Gerar e verificar um hash**
+- Base58: É um sistema de codificação utilizado para tornar dados binários legíveis em texto. Elimina caracteres ambíguos como 0, O, l, I para evitar confusões.
+- Base64: Mais comum em aplicações web, é usada para transmitir dados binários por canais de texto.
+- Blockchains que usam Base58: Bitcoin (endereços)
+- Blockchains que usam Base64: Solana (endereços e transações codificadas)
 
-Usar script simples em JS (Node.js ou direto no navegador):
+```bash
+npm install bs58
+```
 
 ```js
-const { keccak256, toUtf8Bytes } = ethers.utils;
-console.log(keccak256(toUtf8Bytes("mensagem secreta")));
+// Exemplo de codificação Base58
+const bs58 = require("bs58");
+const encoded = bs58.encode(Buffer.from("Lucas"));
+console.log(encoded);
+
+// Exemplo de decodificação Base58
+const decoded = bs58.decode(encoded);
+const decodedMsg = String.fromCharCode(...decoded);
+console.log(decodedMsg);
 ```
 
-### B) **Assinar uma mensagem e verificar a assinatura**
+---
 
-Usando Metamask + ethers.js:
+## **4. Identificação**
+
+- Funções de Hash: Algoritmos unidirecionais que transformam dados de qualquer tamanho em uma saída fixa. São a "impressão digital" da informação.
+- SHA-256: Usado por blockchains como Bitcoin.
+- Keccak-256 (SHA3): Usado por Ethereum.
+
+```bash
+npm install keccak256
+```
 
 ```js
-const signature = await signer.signMessage("Confirma essa transação?");
-const recoveredAddress = ethers.utils.verifyMessage(
-  "Confirma essa transação?",
-  signature
-);
-```
+// Exemplo de hash com Keccak e SHA256
+const crypto = require("crypto");
+const keccak256 = require("keccak256");
 
-Mostrar que:
-
-- Quem assina é a chave privada
-- Qualquer um pode verificar se foi mesmo o endereço correto
-
----
-
-## 🧩 **[35:00 – 45:00] – Aplicações práticas em blockchain**
-
-- Verificação de identidade (KYC, acesso seguro)
-- Assinaturas de transações (Ethereum, Bitcoin, etc.)
-- Validação de blocos e consenso (proof-of-work usa hash)
-- Provas ZK (Zero-Knowledge) também usam hash + assinatura
-
-Mostrar um fluxo de transação com hash + assinatura via Foundry ou Remix:
-
-```solidity
-bytes32 hash = keccak256(abi.encodePacked(msg.sender, valor));
-require(ecrecover(hash, v, r, s) == esperado);
+const msg = "Lucas";
+console.log("SHA256:", crypto.createHash("sha256").update(msg).digest("hex"));
+console.log("Keccak256:", keccak256(msg).toString("hex"));
 ```
 
 ---
 
-## 🛠️ **[45:00 – 55:00] – Mini desafio ao vivo**
+## **5. Encriptação**
 
-### Desafio:
+- AES-128: Algoritmo simétrico de criptografia amplamente usado, inclusive em keystores de carteiras.
+- Casos de uso: Armazenamento seguro de chaves privadas no navegador ou arquivos de backup (.json)
 
-- Gerar uma hash de uma mensagem
-- Assinar a mensagem com sua carteira
-- Verificar a assinatura com o endereço público
+```js
+// Exemplo simples com AES-128
+const crypto = require("crypto");
 
-> Pode usar playgrounds como [ethers.js playground](https://replit.com/@lucasoliv/ethers-playground) ou deixar um repositório com exemplos prontos
+// Gerando uma chave aleatória de 16 bytes
+const key = crypto.randomBytes(16);
+// Gerando um vetor de inicialização aleatório de 16 bytes
+const iv = crypto.randomBytes(16);
+
+// Mensagem a ser encriptada
+const msg = "Lucas";
+// Criando um objeto de cifra com a chave e o vetor de inicialização
+const cipher = crypto.createCipheriv("aes-128-cbc", key, iv);
+// Atualizando a cifra com a mensagem
+let encrypted = cipher.update(msg, "utf8", "hex");
+
+// Finalizando a cifra e adicionando o resultado à mensagem encriptada
+encrypted += cipher.final("hex");
+// Imprimindo a mensagem encriptada
+console.log("Mensagem encriptada:", encrypted);
+
+// Decriptando a mensagem
+const decipher = crypto.createDecipheriv("aes-128-cbc", key, iv);
+let decrypted = decipher.update(encrypted, "hex", "utf8");
+decrypted += decipher.final("utf8");
+
+// Imprimindo a mensagem decriptada
+console.log("Mensagem decriptada:", decrypted);
+```
 
 ---
 
-## 🔚 **[55:00 – 60:00] – Encerramento e chamada para ação**
+## **6. Autentificação**
 
-- Recapitular:
-  - Criptografia é invisível, mas está **em tudo** na blockchain
-  - Hash = identidade dos dados
-  - Assinaturas = sua “autorização”
-- Dica: todo smart contract começa com uma `require(msg.sender == dono)`
-- Preparar para a próxima aula: Arquitetura ZkVerify → onde tudo isso entra com provas ZK
+- Criptografia de chave pública (PKC): Base da autenticação em blockchain.
+- secp256k1: Usado por Bitcoin, Ethereum.
+- secp256r1: Padrão WebAuthn/Passkey – muito usado no Google/Github/Apple e algumas blockchains.
+
+```js
+const { generateKeyPairSync, createSign, createVerify } = require("crypto");
+
+// 1. Gerar par EC
+const { privateKey, publicKey } = generateKeyPairSync("ec", {
+  namedCurve: "secp256k1",
+  publicKeyEncoding: { type: "spki", format: "pem" },
+  privateKeyEncoding: { type: "sec1", format: "pem" },
+});
+
+// 2. Mensagem para assinar
+const message = "Dados críticos que precisam de assinatura";
+
+// 3. Criar e verificar assinatura
+const sign = createSign("sha256");
+sign.update(message);
+const signature = sign.sign(privateKey, "hex");
+
+console.log("Assinatura:", signature);
+
+// Verificação
+const verify = createVerify("sha256");
+verify.update(message);
+const isValid = verify.verify(publicKey, signature, "hex");
+
+console.log("Assinatura válida?", isValid);
+```
+
+---
+
+## **9. Recapitulação:**
+
+- Hoje vimos os fundamentos da segurança criptográfica no mundo blockchain:
+- Como representamos dados (Base58/Base64)
+- Como garantimos integridade (Hash)
+- Como protegemos segredos (AES)
+- Como provamos identidade (Assinaturas Digitais)
+
+---
+
+## **10. Lição de Casa**
+
+### Desafio de Aprendizagem
+
+1. Escrever um artigo de blog explicando, com suas palavras o que aprendeu hoje.
+
+### Desafio de Carreira
+
+2. Post no Linkedin #zknearx (6/10)
+
+### Desafio de Comunidade
+
+3. 😀 Poste o seu emoji mais usado (discord)
+
+---
+
+## **11. Próxima Aula**
+
+**06/05 – Introdução ao Solidity**
+
+- Vamos mergulhar mais fundo em arquiteturas de blockchain para entender o que é a ZKVerify
+
+_"Não esqueça: Aula ao vivo amanhã, 19h, no YouTube. Traga suas dúvidas!"_
