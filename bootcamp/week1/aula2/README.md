@@ -101,10 +101,19 @@ contract HelloWorld {
 
 ### **Padrão ERC-20**
 
+#### READ
+
+- `name()`
+- `symbol()`
+- `decimals()`
 - `balanceOf()`
+
+#### WRITE
+
 - `transferFrom()`
 - `transfer()`
 - `approve()`
+- `allowance()`
 
 ---
 
@@ -140,8 +149,6 @@ modifier onlyOwner() {
     _;
 }
 ```
-
-3. **Proteção contra overflow**: Use OpenZeppelin's `SafeMath`.
 
 ---
 
