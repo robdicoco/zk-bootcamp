@@ -62,22 +62,22 @@ Hoje vamos dar nosso primeiro passo no desenvolvimento de **smart contracts** co
 
 ## **4. Fundamentos de Solidity**
 
-```js
-contract HelloWorld {
-    string message;
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.13;
 
-    constructo() {
-        message = "Hello NearX!";
+contract Counter {
+    uint256 public number;
+
+    function setNumber(uint256 newNumber) public {
+        number = newNumber;
     }
 
-    function set(string memory msg) external {
-        message = msg;
-    }
-
-    function get() external view {
-        return message;
+    function increment() public {
+        number++;
     }
 }
+
 ```
 
 ---
