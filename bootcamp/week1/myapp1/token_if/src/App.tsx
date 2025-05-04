@@ -304,59 +304,103 @@ function App() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+    <div className="min-h-screen bg-dark-bg text-text-primary">
       <Header />
 
-      <main className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          <div className="md:col-span-2">
-            <TokenInfo
-              name={tokenInfo.name}
-              symbol={tokenInfo.symbol}
-              decimals={tokenInfo.decimals}
-              totalSupply={tokenInfo.totalSupply}
-            />
+      <main className="container mx-auto px-4 py-12 max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+          <div className="lg:col-span-2">
+            <div className="secure-card p-8">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-semibold">Token Information</h2>
+                <span className="status-badge secure">Verified Contract</span>
+              </div>
+              <TokenInfo
+                name={tokenInfo.name}
+                symbol={tokenInfo.symbol}
+                decimals={tokenInfo.decimals}
+                totalSupply={tokenInfo.totalSupply}
+              />
+            </div>
           </div>
           <div>
-            <ConnectWallet account={account} balance={balance} onConnect={connectWallet} />
+            <div className="secure-card p-8">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-semibold">Wallet Status</h2>
+                {account && <span className="status-badge secure">Connected</span>}
+              </div>
+              <ConnectWallet account={account} balance={balance} onConnect={connectWallet} />
+            </div>
           </div>
         </div>
 
         {account ? (
-          <Tabs defaultValue="transfer" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="transfer">Transfer</TabsTrigger>
-              <TabsTrigger value="approve">Approve</TabsTrigger>
-              {isOwner && <TabsTrigger value="admin">Admin</TabsTrigger>}
-            </TabsList>
-            <TabsContent value="transfer">
-              <TransferForm onTransfer={transferTokens} />
-            </TabsContent>
-            <TabsContent value="approve">
-              <ApproveForm onApprove={approveTokens} />
-            </TabsContent>
-            {isOwner && (
-              <TabsContent value="admin">
-                <AdminPanel
-                  contractAddress={CONTRACT_ADDRESS}
-                  account={account}
-                  onActionComplete={() => {
-                    fetchTokenInfo()
-                    fetchBalance(account)
-                  }}
-                />
-              </TabsContent>
-            )}
-          </Tabs>
+          <div className="secure-card p-8">
+            <Tabs defaultValue="transfer" className="w-full">
+              <TabsList className="flex space-x-4 border-b border-dark-border mb-8">
+                <TabsTrigger value="transfer" className="secure-tab">
+                  Transfer
+                </TabsTrigger>
+                <TabsTrigger value="approve" className="secure-tab">
+                  Approve
+                </TabsTrigger>
+                {isOwner && (
+                  <TabsTrigger value="admin" className="secure-tab">
+                    Admin
+                  </TabsTrigger>
+                )}
+              </TabsList>
+              <div className="mt-8">
+                <TabsContent value="transfer">
+                  <TransferForm onTransfer={transferTokens} />
+                </TabsContent>
+                <TabsContent value="approve">
+                  <ApproveForm onApprove={approveTokens} />
+                </TabsContent>
+                {isOwner && (
+                  <TabsContent value="admin">
+                    <AdminPanel
+                      contractAddress={CONTRACT_ADDRESS}
+                      account={account}
+                      onActionComplete={() => {
+                        fetchTokenInfo()
+                        fetchBalance(account)
+                      }}
+                    />
+                  </TabsContent>
+                )}
+              </div>
+            </Tabs>
+          </div>
         ) : (
-          <div className="text-center p-8 bg-gray-800 rounded-lg">
-            <p className="text-xl">Connect your wallet to interact with the token</p>
+          <div className="secure-card p-12 text-center">
+            <div className="max-w-md mx-auto">
+              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
+                <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <h2 className="text-2xl font-semibold mb-4">Secure Token Management</h2>
+              <p className="text-text-secondary mb-8">Connect your wallet to access secure token management features</p>
+              <button
+                onClick={connectWallet}
+                className="secure-button"
+              >
+                Connect Wallet
+              </button>
+            </div>
           </div>
         )}
 
         {account && transactions.length > 0 && (
-          <div className="mt-8">
-            <TransactionHistory transactions={transactions} />
+          <div className="mt-12">
+            <div className="secure-card p-8">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-semibold">Transaction History</h2>
+                <span className="text-text-secondary text-sm">Last 24 hours</span>
+              </div>
+              <TransactionHistory transactions={transactions} />
+            </div>
           </div>
         )}
       </main>

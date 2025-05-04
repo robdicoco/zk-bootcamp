@@ -21,12 +21,13 @@ export function ConnectWallet({ account, balance, onConnect }: ConnectWalletProp
         {account ? (
           <div className="space-y-4">
             <div className="space-y-1">
-              <p className="text-sm text-gray-400">Connected Account</p>
-              <p className="text-sm font-medium break-all">{account}</p>
+              <span className="text-sm text-gray-400">Connected Account: </span>
+              <span className="text-sm font-medium break-all">{account}</span>
             </div>
             <div className="space-y-1">
-              <p className="text-sm text-gray-400">Token Balance</p>
-              <p className="text-2xl font-bold text-emerald-400">{formatEther(balance)} Tokens</p>
+
+              <span className="text-sm text-gray-400">Token Balance: </span>
+              <span className="text-2xl font-bold text-emerald-400">{formatEther(balance)} Tokens</span>
             </div>
           </div>
         ) : (
