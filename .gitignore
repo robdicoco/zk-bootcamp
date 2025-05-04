@@ -72,3 +72,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# tx and run files
+tx*.json
+run*.json

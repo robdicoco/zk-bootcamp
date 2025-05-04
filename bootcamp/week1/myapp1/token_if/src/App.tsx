@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { createPublicClient, http, createWalletClient, custom, parseEther } from "viem"
 import { sepolia } from "viem/chains"
 import { Header } from "./components/Header"
@@ -17,6 +17,9 @@ import { abi } from "./lib/abi"
 import "./App.css"
 
 const CONTRACT_ADDRESS = "0xc16b4f8c569212774ee2e8dc41ca2112cc1b8da7"
+const rpcUrl = import.meta.env.VITE_RPC_URL;
+const CACHE_DURATION = 60000; // 1 minute cache
+const DEBOUNCE_DELAY = 1000; // 1 second debounce
 
 function App() {
   const [account, setAccount] = useState<string | null>(null)
@@ -31,10 +34,31 @@ function App() {
   const [transactions, setTransactions] = useState<any[]>([])
   const { toast } = useToast()
 
+  // Cache and debounce refs
+  const tokenInfoCache = useRef<{ data: any; timestamp: number } | null>(null)
+  const balanceTimeoutRef = useRef<NodeJS.Timeout>()
+  const lastBalanceUpdate = useRef<number>(0)
+
   const publicClient = createPublicClient({
     chain: sepolia,
-    transport: http(),
+    transport: http(rpcUrl),
   })
+
+  // Debounced balance fetch
+  const debouncedFetchBalance = useCallback((address: string) => {
+    const now = Date.now()
+    if (now - lastBalanceUpdate.current < DEBOUNCE_DELAY) {
+      if (balanceTimeoutRef.current) {
+        clearTimeout(balanceTimeoutRef.current)
+      }
+      balanceTimeoutRef.current = setTimeout(() => {
+        fetchBalance(address)
+      }, DEBOUNCE_DELAY)
+      return
+    }
+    fetchBalance(address)
+    lastBalanceUpdate.current = now
+  }, [])
 
   const connectWallet = async () => {
     if (window.ethereum) {
@@ -42,17 +66,23 @@ function App() {
         const accounts = await window.ethereum.request({ method: "eth_requestAccounts" })
         setAccount(accounts[0])
 
-        // Check if connected account is the owner
-        const owner = await publicClient.readContract({
-          address: CONTRACT_ADDRESS,
-          abi,
-          functionName: "owner",
-        })
+        // Batch owner check and balance fetch
+        const [owner, balance] = await Promise.all([
+          publicClient.readContract({
+            address: CONTRACT_ADDRESS,
+            abi,
+            functionName: "owner",
+          }),
+          publicClient.readContract({
+            address: CONTRACT_ADDRESS,
+            abi,
+            functionName: "balanceOf",
+            args: [accounts[0]],
+          })
+        ])
 
         setIsOwner(accounts[0].toLowerCase() === owner.toLowerCase())
-
-        // Get user balance
-        fetchBalance(accounts[0])
+        setBalance(balance as bigint)
       } catch (error) {
         console.error("Error connecting to wallet:", error)
         toast({
@@ -71,6 +101,13 @@ function App() {
   }
 
   const fetchTokenInfo = async () => {
+    // Check cache first
+    const now = Date.now()
+    if (tokenInfoCache.current && now - tokenInfoCache.current.timestamp < CACHE_DURATION) {
+      setTokenInfo(tokenInfoCache.current.data)
+      return
+    }
+
     try {
       const [name, symbol, decimals, totalSupply] = await Promise.all([
         publicClient.readContract({
@@ -95,12 +132,20 @@ function App() {
         }),
       ])
 
-      setTokenInfo({
+      const newTokenInfo = {
         name: name as string,
         symbol: symbol as string,
         decimals: decimals as number,
         totalSupply: totalSupply as bigint,
-      })
+      }
+
+      // Update cache
+      tokenInfoCache.current = {
+        data: newTokenInfo,
+        timestamp: now,
+      }
+
+      setTokenInfo(newTokenInfo)
     } catch (error) {
       console.error("Error fetching token info:", error)
     }
@@ -145,10 +190,8 @@ function App() {
         description: `Transfer of ${amount} tokens initiated.`,
       })
 
-      // Add to transaction history
       setTransactions((prev) => [{ hash, type: "Transfer", to, amount, timestamp: Date.now() }, ...prev])
 
-      // Wait for transaction to be mined
       const receipt = await publicClient.waitForTransactionReceipt({ hash })
 
       if (receipt.status === "success") {
@@ -157,8 +200,8 @@ function App() {
           description: `Successfully transferred ${amount} tokens to ${to.substring(0, 6)}...${to.substring(to.length - 4)}`,
         })
 
-        // Refresh balance
-        fetchBalance(account)
+        // Use debounced balance update
+        debouncedFetchBalance(account)
       } else {
         toast({
           variant: "destructive",
@@ -200,10 +243,8 @@ function App() {
         description: `Approval of ${amount} tokens initiated.`,
       })
 
-      // Add to transaction history
       setTransactions((prev) => [{ hash, type: "Approve", spender, amount, timestamp: Date.now() }, ...prev])
 
-      // Wait for transaction to be mined
       const receipt = await publicClient.waitForTransactionReceipt({ hash })
 
       if (receipt.status === "success") {
@@ -231,14 +272,14 @@ function App() {
   useEffect(() => {
     fetchTokenInfo()
 
-    // Check if already connected
     if (window.ethereum) {
       window.ethereum
         .request({ method: "eth_accounts" })
         .then((accounts: string[]) => {
           if (accounts.length > 0) {
             setAccount(accounts[0])
-            fetchBalance(accounts[0])
+            // Use debounced balance fetch
+            debouncedFetchBalance(accounts[0])
 
             // Check if connected account is the owner
             publicClient
@@ -248,11 +289,17 @@ function App() {
                 functionName: "owner",
               })
               .then((owner) => {
-                setIsOwner(accounts[0].toLowerCase() === (owner as string).toLowerCase())
+                setIsOwner(accounts[0].toLowerCase() === owner.toLowerCase())
               })
           }
         })
-        .catch(console.error)
+    }
+
+    // Cleanup
+    return () => {
+      if (balanceTimeoutRef.current) {
+        clearTimeout(balanceTimeoutRef.current)
+      }
     }
   }, [])
 
