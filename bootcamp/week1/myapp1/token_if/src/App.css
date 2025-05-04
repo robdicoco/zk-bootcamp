@@ -1,0 +1,11 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  color-scheme: dark;
+}
+
+#root {
+  min-height: 100vh;
+}
