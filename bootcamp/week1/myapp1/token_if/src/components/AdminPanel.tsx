@@ -38,11 +38,11 @@ export function AdminPanel({ contractAddress, account, onActionComplete }: Admin
       })
 
       const hash = await walletClient.writeContract({
-        address: contractAddress,
+        address: contractAddress as `0x${string}`,
         abi,
         functionName,
         args,
-        account,
+        account: account as `0x${string}`,
       })
 
       toast({
@@ -57,7 +57,7 @@ export function AdminPanel({ contractAddress, account, onActionComplete }: Admin
             const receipt = await walletClient.transport.request({
               method: "eth_getTransactionReceipt",
               params: [hash],
-            })
+            }) as { status: string }
 
             if (receipt) {
               resolve(receipt.status === "0x1")

@@ -193,7 +193,7 @@ function App() {
         abi,
         functionName: "transfer",
         args: [to, parsedAmount],
-        account,
+        account: account as `0x${string}`,
       })
 
       toast({
@@ -246,7 +246,7 @@ function App() {
         abi,
         functionName: "approve",
         args: [spender, parsedAmount],
-        account,
+        account: account as `0x${string}`,
       })
 
       toast({
@@ -300,7 +300,7 @@ function App() {
                 functionName: "owner",
               })
               .then((owner) => {
-                setIsOwner(accounts[0].toLowerCase() === owner.toLowerCase())
+                setIsOwner(accounts[0].toLowerCase() === (owner as `0x${string}`).toLowerCase())
               })
           }
         })
