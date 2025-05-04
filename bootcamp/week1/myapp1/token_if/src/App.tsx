@@ -64,7 +64,8 @@ function App() {
     if (window.ethereum) {
       try {
         const accounts = await window.ethereum.request({ method: "eth_requestAccounts" })
-        setAccount(accounts[0])
+        const userAccount = accounts[0] as `0x${string}`
+        setAccount(userAccount)
 
         // Batch owner check and balance fetch
         const [owner, balance] = await Promise.all([
@@ -72,16 +73,16 @@ function App() {
             address: CONTRACT_ADDRESS,
             abi,
             functionName: "owner",
-          }),
+          }) as Promise<`0x${string}`>,
           publicClient.readContract({
             address: CONTRACT_ADDRESS,
             abi,
             functionName: "balanceOf",
-            args: [accounts[0]],
+            args: [userAccount],
           })
         ])
 
-        setIsOwner(accounts[0].toLowerCase() === owner.toLowerCase())
+        setIsOwner(userAccount.toLowerCase() === owner.toLowerCase())
         setBalance(balance as bigint)
       } catch (error) {
         console.error("Error connecting to wallet:", error)
@@ -98,6 +99,16 @@ function App() {
         description: "Please install MetaMask or another Ethereum wallet.",
       })
     }
+  }
+
+  const disconnectWallet = () => {
+    setAccount(null)
+    setIsOwner(false)
+    setBalance(BigInt(0))
+    toast({
+      title: "Wallet Disconnected",
+      description: "Your wallet has been disconnected successfully.",
+    })
   }
 
   const fetchTokenInfo = async () => {
@@ -329,7 +340,12 @@ function App() {
                 <h2 className="text-xl font-semibold">Wallet Status</h2>
                 {account && <span className="status-badge secure">Connected</span>}
               </div>
-              <ConnectWallet account={account} balance={balance} onConnect={connectWallet} />
+              <ConnectWallet 
+                account={account} 
+                balance={balance} 
+                onConnect={connectWallet}
+                onDisconnect={disconnectWallet}
+              />
             </div>
           </div>
         </div>
@@ -375,7 +391,7 @@ function App() {
         ) : (
           <div className="secure-card p-12 text-center">
             <div className="max-w-md mx-auto">
-              <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
+              <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center max-w-[48px] max-h-[48px]" >
                 <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
