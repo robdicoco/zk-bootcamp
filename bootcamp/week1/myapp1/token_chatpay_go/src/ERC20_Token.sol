@@ -36,7 +36,8 @@ contract ERC20_Token is Ownable, Pausable, ReentrancyGuard {
 
     function transfer(address to, uint256 amount) public whenNotPaused returns (bool) {
         require(balanceOf[msg.sender] >= amount, "ERC20: insufficient balance");
-        
+        require(!isBlacklisted[msg.sender] && !isBlacklisted[to], "ERC20: sender or recipient is blacklisted");
+
         balanceOf[msg.sender] -= amount;
         balanceOf[to] += amount;
         
@@ -68,12 +69,20 @@ contract ERC20_Token is Ownable, Pausable, ReentrancyGuard {
         return true;
     }
 
-    function transferFrom(address from, address to, uint256 amount) public returns (bool success) {
+    function transferFrom(address from,address to, uint256 amount) public returns (bool success) {
         require(allowance[from][msg.sender] >= amount, "ERC20: insufficient allowance");
         
+        require(
+            !isBlacklisted[from] && 
+            !isBlacklisted[to] && 
+            !isBlacklisted[msg.sender],
+            "ERC20: sender, recipient, or spender is blacklisted"
+        );
+
         balanceOf[from] -= amount;
         balanceOf[to] += amount;
         allowance[from][msg.sender] -= amount;
+
         emit Transfer(from, to, amount);
         return true;
     }

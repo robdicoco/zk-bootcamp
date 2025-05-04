@@ -6,13 +6,17 @@ import "../src/ERC20_Token.sol";
 
 contract ERC20TokenTest is Test {
     ERC20_Token token;
-    address owner = address(1);
-    address user1 = address(2);
-    address user2 = address(3);
-    address spender = address(4);
+    address owner;
+    address user1;
+    address user2;
+    address spender;
 
     function setUp() public {
-        vm.prank(owner);
+        owner = address(this);
+        user1 = address(0x1);
+        user2 = address(0x2);
+        spender = address(0x3);
+        
         token = new ERC20_Token("ChatPayGO", "CPGO", 18);
     }
 
@@ -163,5 +167,64 @@ contract ERC20TokenTest is Test {
         vm.prank(owner);
         token.transfer(user1, 50 ether);
         assertEq(token.balanceOf(user1), 50 ether);
+    }
+
+    function testTransferFromBlacklisted() public {
+        // Mint tokens to user1
+        vm.prank(owner);
+        token.mint(1000 ether);
+        vm.prank(owner);
+        token.transfer(user1, 100 ether);
+        assertEq(token.balanceOf(user1), 100 ether);
+
+        // Approve spender to spend user1's tokens
+        vm.prank(user1);
+        token.approve(spender, 50 ether);
+        assertEq(token.allowance(user1, spender), 50 ether);
+
+        // Blacklist spender
+        vm.prank(owner);
+        token.blacklist(spender);
+
+        // spender should not be able to transfer tokens from user1
+        vm.prank(spender);
+        vm.expectRevert("ERC20: sender, recipient, or spender is blacklisted");
+        token.transferFrom(user1, user2, 50 ether);
+
+        // Unblacklist spender
+        vm.prank(owner);
+        token.unblacklist(spender);
+
+        // Now spender should be able to transfer tokens from user1
+        vm.prank(spender);
+        token.transferFrom(user1, user2, 50 ether);
+        assertEq(token.balanceOf(user2), 50 ether);
+        assertEq(token.balanceOf(user1), 50 ether);
+        assertEq(token.allowance(user1, spender), 0);
+    }
+
+    function testTransferToBlacklisted() public {
+        // Mint tokens to user1
+        vm.prank(owner);
+        token.mint(1000 ether);
+        vm.prank(owner);
+        token.transfer(user1, 100 ether);
+        assertEq(token.balanceOf(user1), 100 ether);
+
+        // Blacklist user2
+        vm.prank(owner);
+        token.blacklist(user2);
+
+        // user1 should not be able to transfer tokens to user2
+        vm.prank(user1);
+        vm.expectRevert("ERC20: sender or recipient is blacklisted");
+        token.transfer(user2, 50 ether);
+
+        // Unblacklist and verify
+        vm.prank(owner);
+        token.unblacklist(user2);
+        vm.prank(user1);
+        token.transfer(user2, 50 ether);
+        assertEq(token.balanceOf(user2), 50 ether);
     }
 }
