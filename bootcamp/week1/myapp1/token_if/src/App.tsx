@@ -338,8 +338,7 @@ function App() {
           <div className="lg:col-span-2">
             <div className="secure-card p-8">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold">Token Information</h2>
-                <span className="status-badge secure">Verified Contract</span>
+                {/* <h2 className="text-xl font-semibold">Token Information</h2> */}
               </div>
               <TokenInfo
                 name={tokenInfo.name}
