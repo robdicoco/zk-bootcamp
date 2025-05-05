@@ -16,7 +16,7 @@ import { useToast } from "./components/ui/use-toast"
 import { abi } from "./lib/abi"
 import "./App.css"
 
-const CONTRACT_ADDRESS = "0xc16b4f8c569212774ee2e8dc41ca2112cc1b8da7"
+const CONTRACT_ADDRESS = "0x1949b0d792ed35dd04eb540b5571d20fb698d566"
 const rpcUrl = import.meta.env.VITE_RPC_URL;
 const CACHE_DURATION = 60000; // 1 minute cache
 const DEBOUNCE_DELAY = 1000; // 1 second debounce
@@ -101,13 +101,28 @@ function App() {
     }
   }
 
-  const disconnectWallet = () => {
+  const disconnectWallet = async () => {
+    if (window.ethereum && window.ethereum.selectedAddress) {
+      try {
+        // Optional: Revoke permissions for this dApp
+        await window.ethereum.request({
+          method: 'wallet_revokePermissions',
+          params: [{ eth_accounts: {} }], // Revoke account access
+        })
+      } catch (error) {
+        console.warn("Failed to revoke wallet permissions:", error)
+        // Non-critical failure; continue with local state cleanup
+      }
+    }
+  
+    // Clear frontend state
     setAccount(null)
     setIsOwner(false)
     setBalance(BigInt(0))
+  
     toast({
       title: "Wallet Disconnected",
-      description: "Your wallet has been disconnected successfully.",
+      description: "Your wallet has been disconnected. You may need to re-authorize access when reconnecting.",
     })
   }
 
@@ -392,7 +407,7 @@ function App() {
           <div className="secure-card p-12 text-center">
             <div className="max-w-md mx-auto">
               <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center max-w-[48px] max-h-[48px]" >
-                <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" width="36x" height="36px" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </div>

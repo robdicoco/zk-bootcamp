@@ -76,3 +76,7 @@ next-env.d.ts
 # tx and run files
 tx*.json
 run*.json
+
+# dist
+dist/
+bootcamp/week1/myapp1/token_if/dist

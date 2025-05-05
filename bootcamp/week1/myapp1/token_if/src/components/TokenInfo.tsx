@@ -34,7 +34,7 @@ export function TokenInfo({ name, symbol, decimals, totalSupply }: TokenInfoProp
           </div>
           <div className="flex items-center justify-between py-2">
             <span className="text-text-secondary">Contract Address: </span>
-            <span className="text-text-primary font-semibold text-sm break-all">0xc16b4f8c569212774ee2e8dc41ca2112cc1b8da7</span>
+            <span className="text-text-primary font-semibold text-sm break-all">0x1949b0d792ed35dd04eb540b5571d20fb698d566</span>
           </div>
         </div>
       </CardContent>
